@@ -28,7 +28,9 @@ transect_wL<-transect_depth %>%
   #Convert to waterLevel in cm
   mutate(waterLevel=-100*d_n) %>% 
   #select cols of interest
-  select(day, station, wetland, waterLevel)
+  select(day, station, wetland, waterLevel) %>% 
+  #Select sites of interest
+  filter(!str_detect(station, 'AIK')) 
   
 #clean up wetland water level data
 wetland_wL<-wetland_wL %>% 
@@ -38,6 +40,10 @@ wetland_wL<-wetland_wL %>%
          waterLevel=100*waterLevel) %>% 
   #select cols of interest
   select(day, station, wetland, waterLevel)
+
+#Only include wetlands of interest in wetland water level calc
+woi<-transect_wL %>% select(wetland) %>% unique() %>% pull()
+wetland_wL<-wetland_wL %>% filter(wetland %in% woi)
 
 #Combine df
 waterLevel<-bind_rows(transect_wL, wetland_wL)
