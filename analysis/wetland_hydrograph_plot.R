@@ -116,7 +116,7 @@ hyd<-ggplot() +
   geom_line(aes(x=wetland$day, y=wetland$mean), 
             col=line_col) +
   #Legend/color
-  scale_fill_manual(name='Transect Location', values=cols) +
+  scale_fill_manual(name=NULL, values=cols) +
   #Clip to water year
   coord_cartesian(xlim=as.Date(c("2017-10-01", "2018-09-30"))) +
   #theme options
