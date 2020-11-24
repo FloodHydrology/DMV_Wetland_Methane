@@ -71,7 +71,7 @@ e <- df %>% filter(station == "SC-E")
 ribbon_alpha<-0.90
 
 #Define colors
-cols<-tibble(" Wetland" = '#045a8d',
+cols<-tibble("Wetland" = '#045a8d',
              'A' = '#2b8cbe',
              'B' = '#74a9cf',
              'C' = '#a6bddb',
@@ -111,7 +111,7 @@ hyd<-ggplot() +
   geom_line(aes(x=a$day, y=a$mean), 
             col=line_col) +
   #Wetland
-  geom_ribbon(aes(ymin = wetland$lwr, ymax = wetland$upr, x = wetland$day, fill=' Wetland'),
+  geom_ribbon(aes(ymin = wetland$lwr, ymax = wetland$upr, x = wetland$day, fill='Wetland'),
               alpha=ribbon_alpha) +
   geom_line(aes(x=wetland$day, y=wetland$mean), 
             col=line_col) +
@@ -126,21 +126,21 @@ hyd<-ggplot() +
     scale_x_date(date_labels = "%b") +
     theme(axis.title = element_text(size = 14),
           axis.text = element_text(size = 10),
-          legend.position = c("bottom"), 
-          legend.title = element_text(size=14), 
+          legend.position = c("right"), 
+          legend.title = element_text(size=10), 
           legend.text  = element_text(size=10))+
-  guides(fill=guide_legend(nrow=1))
+  guides(fill=guide_legend(nrow=6, byrow=T))
 
 #2.5 Print plot---------------------------------------------
-tiff("docs/hydrograph.tif", res=300, width = 3.5, height = 3, units = 'in')
+tiff("docs/hydrograph.tif", res=300, width = 5, height = 3, units = 'in')
 hyd 
 dev.off()
 
-png("docs/hydrograph.png", res=300, width = 3.5, height = 3, units = 'in')
+png("docs/hydrograph.png", res=300, width = 5, height = 3, units = 'in')
 hyd 
 dev.off()
 
-pdf("docs/hydrograph.pdf", width = 3.5, height = 3)
+pdf("docs/hydrograph.pdf", width = 5, height = 3)
 hyd 
 dev.off()
 
